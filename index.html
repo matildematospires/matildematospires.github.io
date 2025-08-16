@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Assistente Virtual — <!-- TODO: teu nome/brand --></title>
+  <meta name="description" content="Assistente Virtual para empreendedores e PMEs: gestão de agenda e e-mails, atendimento ao cliente e organização de processos." />
+  <meta name="theme-color" content="#0b1220" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Assistente Virtual — <!-- TODO: Nome -->" />
+  <meta property="og:description" content="Gestão de agenda, atendimento e organização para libertar o teu tempo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://<!-- TODO: o_teu_utilizador -->.github.io/" />
+  <style>
+    :root{
+      --bg:#0b1220; --bg2:#0e1830; --card:#0f1b36; --line:#24324d;
+      --text:#e7eefc; --muted:#a9b7d3; --brand:#6ee7ff; --brand-2:#8b5cf6; --accent:#22c55e;
+      --max:1120px; --radius:14px; --pad:22px; --shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0; font-family: system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,sans-serif; background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(110,231,255,.06), transparent 60%),
+      radial-gradient(900px 600px at -10% 10%, rgba(139,92,246,.09), transparent 60%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); color:var(--text)}
+    a{color:var(--brand); text-decoration:none}
+    img{max-width:100%; display:block}
+    /* Header */
+    header{position:sticky; top:0; z-index:40; backdrop-filter: saturate(160%) blur(10px); background: rgba(9,14,30,.55); border-bottom:1px solid rgba(36,50,77,.6)}
+    nav{max-width:var(--max); margin:auto; padding:12px var(--pad); display:flex; align-items:center; justify-content:space-between}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px}
+    .brand .dot{width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+    .links a{margin-left:18px; color:var(--muted); font-weight:600}
+    .links a.active{color:#fff}
+    .cta-nav{margin-left:18px; padding:8px 12px; border-radius:10px; border:1px solid rgba(110,231,255,.5)}
+    /* Mobile */
+    .menu-btn{display:none; background:none; border:0; color:#fff; font-size:22px}
+    @media (max-width:900px){
+      .links{display:none}
+      .menu-btn{display:block}
+      .mobile-menu{display:none; border-top:1px solid var(--line); background:rgba(9,14,30,.9)}
+      .mobile-menu a{display:block; padding:14px var(--pad); border-bottom:1px solid rgba(36,50,77,.6); color:var(--muted); font-weight:600}
+      .mobile-menu a:last-child{border-bottom:0}
+    }
+    /* Sections */
+    .section{max-width:var(--max); margin:auto; padding: min(7vw,70px) var(--pad)}
+    h1{font-size: clamp(32px, 5vw, 56px); line-height:1.08; margin:0 0 10px}
+    h2{font-size: clamp(24px, 3.4vw, 32px); margin:0 0 14px}
+    p.lead{font-size: clamp(16px, 2.2vw, 20px); color:var(--muted)}
+    .btn{display:inline-block; padding:14px 18px; border-radius:12px; font-weight:800; letter-spacing:.2px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#0b1020}
+    .btn.ghost{background:transparent; border:1px solid rgba(110,231,255,.6); color:var(--text)}
+    .grid-2{display:grid; gap:22px; grid-template-columns:1.1fr .9fr}
+    .grid-3{display:grid; gap:18px; grid-template-columns:repeat(3,1fr)}
+    .grid-4{display:grid; gap:18px; grid-template-columns:repeat(4,1fr)}
+    @media (max-width:1000px){ .grid-2,.grid-3,.grid-4{grid-template-columns:1fr} }
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)); border:1px solid rgba(110,231,255,.12); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow)}
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:rgba(110,231,255,.12); color:#d9f7ff; font-weight:700; font-size:13px; border:1px solid rgba(110,231,255,.25)}
+    .muted{color:var(--muted)}
+    .check{width:18px; height:18px; display:inline-block; border-radius:4px; background:linear-gradient(135deg,#34d399,#16a34a)}
+    .list{list-style:none; padding:0; margin:10px 0}
+    .list li{display:flex; align-items:flex-start; gap:10px; padding:8px 0; border-bottom:1px dashed rgba(110,231,255,.12)}
+    .list li:last-child{border-bottom:0}
+    /* Hero */
+    .hero{display:grid; gap:28px; grid-template-columns: 1.15fr .85fr; align-items:center}
+    .hero-aside{position:relative}
+    .blob{position:absolute; right:-20px; top:-20px; width:220px; height:220px; filter: blur(50px); opacity:.6; background: radial-gradient(closest-side, rgba(139,92,246,.8), transparent)}
+    .hero-card{position:relative; overflow:hidden}
+    .hero-card .tag{position:absolute; top:14px; right:14px}
+    /* Services */
+    .svc{display:flex; gap:12px}
+    .svc-icon{flex:0 0 38px; height:38px; border-radius:10px; background:rgba(139,92,246,.18); display:flex; align-items:center; justify-content:center; font-weight:900}
+    /* Steps */
+    .steps{counter-reset: step}
+    .step{position:relative; padding-left:56px}
+    .step:not(:last-child){margin-bottom:18px}
+    .step:before{counter-increment: step; content: counter(step); position:absolute; left:0; top:2px; width:38px; height:38px; border-radius:12px; display:grid; place-items:center; font-weight:900; background:rgba(110,231,255,.15); border:1px solid rgba(110,231,255,.35)}
+    /* Testimonials */
+    .quote{font-style:italic}
+    /* CTA */
+    .cta{background: radial-gradient(600px 400px at 20% -20%, rgba(110,231,255,.09), transparent 50%), linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)); border:1px solid rgba(110,231,255,.18); border-radius:var(--radius); padding:28px}
+    /* Footer */
+    footer{border-top:1px solid rgba(36,50,77,.6); background:rgba(9,14,30,.6)}
+    footer .row{max-width:var(--max); margin:auto; padding:24px var(--pad); display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap}
+    .social a{margin-left:12px; color:var(--muted)}
+    /* Small helpers */
+    .sr{position:absolute; left:-9999px}
+  </style>
+</head>
+<body>
+  <a id="top" class="sr">topo</a>
+  <header>
+    <nav>
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <span><!-- TODO: Nome/Marca -->Assistente Virtual</span>
+      </div>
+      <div class="links" id="links">
+        <a href="#inicio" class="active">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#processo">Como funciona</a>
+        <a href="#contacto" class="cta-nav">Contactar</a>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu" aria-label="Menu móvel">
+      <a href="#inicio">Início</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#processo">Como funciona</a>
+      <a href="#contacto">Contactar</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="inicio" class="section hero">
+    <div>
+      <span class="pill">Disponibilidade rápida · Onboarding em 48h</span>
+      <h1>Tempo para o que importa.<br/>Eu trato do resto.</h1>
+      <p class="lead">Gestão de agenda e e-mails, atendimento ao cliente e organização de processos — para libertar a tua semana e ganhar foco.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px">
+        <a class="btn" href="https://calendly.com/<!-- TODO: o_teu_utilizador -->/15min" target="_blank" rel="noopener">Marcar reunião gratuita</a>
+        <a class="btn ghost" href="#servicos">Ver serviços</a>
+      </div>
+      <ul class="list" style="margin-top:14px">
+        <li><span class="check" aria-hidden="true"></span>Resposta em 24h · Seg–Sex</li>
+        <li><span class="check" aria-hidden="true"></span>Comunicação por e-mail/WhatsApp</li>
+        <li><span class="check" aria-hidden="true"></span>Report semanal de tarefas</li>
+      </ul>
+    </div>
+    <aside class="hero-aside">
+      <div class="blob" aria-hidden="true"></div>
+      <div class="card hero-card">
+        <span class="tag pill">Pacotes flexíveis</span>
+        <h2 style="margin-top:8px">O teu apoio operacional, sem complicações</h2>
+        <p class="muted">Começa com um pacote piloto de horas e evolui conforme as tuas prioridades.</p>
+        <div class="grid-2" style="margin-top:10px">
+          <div class="card">
+            <h3 style="margin:0 0 6px">Pacote Starter</h3>
+            <p class="muted" style="margin:0">5–10 h/semana · ideal para testes e quick wins.</p>
+          </div>
+          <div class="card">
+            <h3 style="margin:0 0 6px">Pacote Mensal</h3>
+            <p class="muted" style="margin:0">Retainer com prioridades definidas e SLA.</p>
+          </div>
+        </div>
+        <a class="btn" style="margin-top:12px" href="#contacto">Falar agora</a>
+      </div>
+    </aside>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre" class="section">
+    <div class="grid-2">
+      <div>
+        <h2>Sobre mim</h2>
+        <p>Sou <strong><!-- TODO: teu nome --></strong>, Assistente Virtual focada em aliviar a carga administrativa de empreendedores e PMEs. Trabalho com Google Workspace, Notion, Trello/Asana e CRM para construir rotinas mais leves e produtivas.</p>
+        <p>Alinho contigo prioridades claras, comunico de forma objetiva e entrego com previsibilidade.</p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:6px">
+          <a class="btn" href="https://calendly.com/<!-- TODO -->/15min" target="_blank" rel="noopener">Agendar 15 min</a>
+          <a class="btn ghost" href="#processo">Como funciona</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin:6px 0 10px">Competências</h3>
+        <ul class="list">
+          <li><span class="check"></span>Gestão de inbox & calendário</li>
+          <li><span class="check"></span>Atendimento e follow-up</li>
+          <li><span class="check"></span>Organização de documentos & propostas</li>
+          <li><span class="check"></span>Reports simples e apresentações</li>
+          <li><span class="check"></span>Agendamento de conteúdos (opcional)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos" class="section">
+    <h2>Serviços</h2>
+    <div class="grid-4">
+      <div class="card svc">
+        <div class="svc-icon">📅</div>
+        <div>
+          <h3 style="margin:0 0 6px">Agenda & E-mails</h3>
+          <p class="muted">Coordenação de reuniões, filtros e respostas prioritárias.</p>
+        </div>
+      </div>
+      <div class="card svc">
+        <div class="svc-icon">💬</div>
+        <div>
+          <h3 style="margin:0 0 6px">Atendimento ao Cliente</h3>
+          <p class="muted">WhatsApp/E-mail, FAQs e encaminhamento de pedidos.</p>
+        </div>
+      </div>
+      <div class="card svc">
+        <div class="svc-icon">📁</div>
+        <div>
+          <h3 style="margin:0 0 6px">Organização & Docs</h3>
+          <p class="muted">Propostas, apresentações, planilhas e templates.</p>
+        </div>
+      </div>
+      <div class="card svc">
+        <div class="svc-icon">🗂️</div>
+        <div>
+          <h3 style="margin:0 0 6px">Processos & Rotinas</h3>
+          <p class="muted">Checklists, cadências e SOPs simples para escala.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3 style="margin:0 0 8px">Pacotes</h3>
+      <ul class="list">
+        <li><span class="check"></span><strong>Piloto</strong>: 10 h/2 semanas — ideal para começar.</li>
+        <li><span class="check"></span><strong>Retainer</strong>: mensal, com prioridades e SLA definidos.</li>
+        <li><span class="check"></span><strong>À medida</strong>: focado num projeto específico.</li>
+      </ul>
+      <a class="btn" href="#contacto">Pedir proposta</a>
+    </div>
+  </section>
+
+  <!-- PROCESSO -->
+  <section id="processo" class="section">
+    <h2>Como funciona</h2>
+    <div class="grid-3 steps">
+      <div class="card step">
+        <h3>Chamada inicial</h3>
+        <p class="muted">15 minutos para alinhar necessidades, prioridades e ferramentas.</p>
+      </div>
+      <div class="card step">
+        <h3>Plano & setup</h3>
+        <p class="muted">Definição de tarefas, acessos e rotina. Onboarding em até 48h.</p>
+      </div>
+      <div class="card step">
+        <h3>Execução & reporting</h3>
+        <p class="muted">Entregas contínuas + relatório semanal e ajustes quando necessário.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTEMUNHOS (opcional) -->
+  <section class="section" aria-labelledby="testemunhos">
+    <h2 id="testemunhos">Testemunhos</h2>
+    <div class="grid-3">
+      <div class="card">
+        <p class="quote">“Organização impecável e comunicação direta. Libertou-me horas por semana.”</p>
+        <p class="muted">— <!-- TODO: Nome do cliente -->, Founder</p>
+      </div>
+      <div class="card">
+        <p class="quote">“Melhorou o atendimento e criou processos simples que a equipa segue.”</p>
+        <p class="muted">— <!-- TODO: Nome -->, E-commerce</p>
+      </div>
+      <div class="card">
+        <p class="quote">“Delegar ficou fácil. Pacote mensal com previsibilidade.”</p>
+        <p class="muted">— <!-- TODO: Nome -->, Consultoria</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="cta">
+      <div class="grid-2">
+        <div>
+          <h2>Pronta para começar?</h2>
+          <p class="muted">Marca uma chamada de 15 minutos ou envia uma mensagem pelo formulário.</p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap">
+            <a class="btn" href="https://calendly.com/<!-- TODO -->/15min" target="_blank" rel="noopener">Agendar 15 min</a>
+            <a class="btn ghost" href="#contacto">Enviar mensagem</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="margin:6px 0 10px">Inclui</h3>
+          <ul class="list">
+            <li><span class="check"></span>Onboarding em 48h</li>
+            <li><span class="check"></span>Prioridades semanais</li>
+            <li><span class="check"></span>Report simples de tarefas</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="section">
+    <h2>Contacto</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="margin-top:0">Marcar reunião</h3>
+        <!-- Calendly embed: substitui o username no src -->
+        <div style="position:relative;padding-bottom:65%;height:0;overflow:hidden;border-radius:12px;border:1px solid rgba(110,231,255,.2)">
+          <iframe src="https://calendly.com/<!-- TODO: o_teu_utilizador -->/15min?hide_gdpr_banner=1"
+                  title="Agendar reunião"
+                  style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"
+                  loading="lazy"></iframe>
+        </div>
+        <p class="muted" style="margin-top:8px">* Se preferires, envia mensagem pelo formulário ao lado.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Formulário</h3>
+        <!-- GOOGLE FORMS (troca pelo teu link de incorporação) -->
+        <!-- Exemplo embed Google Forms: -->
+        <!--
+        <iframe src="https://docs.google.com/forms/d/e/SEU_ID_DO_FORM/viewform?embedded=true"
+                width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0">A carregar…</iframe>
+        -->
+        <!-- Alternativa: Tally (mais bonito). Troca SEU_ID: -->
+        <!--
+        <iframe data-tally-src="https://tally.so/embed/SEU_ID?hideTitle=1&transparentBackground=1"
+                width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0" title="Contacto"></iframe>
+        <script>var d=document,w="https://tally.so/widgets/embed.js";d.querySelector('script[src="'+w+'"]')||document.body.appendChild(Object.assign(d.createElement("script"),{src:w,async:true}));</script>
+        -->
+        <!-- Fallback simples (mailto) se não tiveres embed ainda: -->
+        <p class="muted">Ainda sem formulário? Clica para enviar e-mail:</p>
+        <p><a class="btn" href="mailto:<!-- TODO: teu_email -->?subject=Contacto%20via%20site">Enviar e-mail</a></p>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:14px; font-size:13px">Ao enviar contacto, concordas em ser contactado/a para resposta. Não partilho os teus dados com terceiros. <!-- TODO: link para política de privacidade, se tiveres --></p>
+  </section>
+
+  <footer>
+    <div class="row">
+      <div>© <span id="y"></span> <!-- TODO: teu nome -->. Todos os direitos reservados.</div>
+      <div class="social">
+        <!-- TODO: substitui os links ou remove -->
+        <a href="https://www.linkedin.com/in/<!-- teu_perfil -->" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.instagram.com/<!-- teu_perfil -->" target="_blank" rel="noopener">Instagram</a>
+        <a href="#top">Topo ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Ano no footer
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Menu mobile
+    const btn = document.getElementById('menuBtn');
+    const mm = document.getElementById('mobileMenu');
+    btn?.addEventListener('click', () => {
+      mm.style.display = mm.style.display === 'block' ? 'none' : 'block';
+    });
+    mm?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mm.style.display='none'));
+
+    // Scrollspy simples para destacar link ativo
+    const sections = [...document.querySelectorAll('section[id]')];
+    const links = [...document.querySelectorAll('#links a')];
+    const setActive = () => {
+      let idx = 0;
+      const fromTop = window.scrollY + 120;
+      sections.forEach((sec, i) => { if (sec.offsetTop <= fromTop) idx = i; });
+      links.forEach(l => l.classList.remove('active'));
+      const id = sections[idx]?.id;
+      const current = links.find(l => l.getAttribute('href') === '#' + id);
+      current?.classList.add('active');
+    };
+    window.addEventListener('scroll', setActive, {passive:true});
+    setActive();
+  </script>
+
+  <!-- Schema.org básico (ProfessionalService) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ProfessionalService",
+    "name":"<!-- TODO: Nome/Brand -->",
+    "url":"https://<!-- TODO: o_teu_utilizador -->.github.io/",
+    "description":"Assistente Virtual para empreendedores e PMEs: agenda, e-mails, atendimento e organização.",
+    "areaServed":"Portugal",
+    "availableLanguage":["pt-PT","pt-BR","en"],
+    "sameAs":["https://www.linkedin.com/in/<!-- TODO -->"]
+  }
+  </script>
+</body>
+</html>
