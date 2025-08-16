@@ -3,75 +3,86 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Helena Costa - Assistente Virtual</title>
-  <meta name="description" content="Assistente Virtual: gestão de agenda e e-mails, atendimento ao cliente, organização e processos para empreendedores e PMEs.">
-  <meta name="theme-color" content="#F7F1E8">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Helena Costa — Assistente Virtual</title>
+  <meta name="description" content="Assistente Virtual: gestão de agenda e e-mails, atendimento ao cliente e organização de processos para empreendedores e PMEs.">
+  <meta name="theme-color" content="#FBF2CF">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      /* Paleta neutra/terrosa */
-      --cream:#F7F1E8;      /* fundo principal */
-      --sand:#EDE4D8;       /* blocos */
-      --blush:#EBCFC1;      /* destaque suave */
-      --gold:#D9C3A2;       /* faixas/linhas */
-      --terra:#C97357;      /* botões/CTAs */
-      --terra-dark:#A95B43; /* hover */
-      --ink:#2E2A27;        /* texto principal */
-      --muted:#6F655E;      /* texto secundário */
-      --max:1120px; --pad:22px; --r:14px; --shadow:0 10px 30px rgba(0,0,0,.07);
+      /* PALETA SOLICITADA */
+      --primary:#FA7070;   /* botões/CTAs */
+      --bg:#FBF2CF;        /* fundo */
+      --accent:#A1C298;    /* detalhes / badges / links */
+      /* Suporte */
+      --ink:#222222;       /* texto principal (bom contraste sobre o creme) */
+      --muted:#5e5a52;     /* texto secundário */
+      --card:#FFFFFF;      /* cartões */
+      --line:#E8E0B8;      /* linhas e bordas suaves */
+      --r:14px; --max:1120px; --pad:22px; --shadow:0 10px 28px rgba(0,0,0,.06);
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0; background:var(--cream); color:var(--ink);
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;}
-    h1,h2,h3,.brand{font-family: "Playfair Display", Georgia, "Times New Roman", serif}
-    a{color:var(--ink); text-decoration:none}
+    body{
+      margin:0; background:var(--bg); color:var(--ink);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    h1,h2,h3,.brand{font-family:"Playfair Display", Georgia, "Times New Roman", serif}
+    a{color:var(--accent); text-decoration:none}
     img{max-width:100%; display:block; border-radius:12px}
+
     /* Header */
-    header{position:sticky; top:0; z-index:50; background:rgba(247,241,232,.85); backdrop-filter:saturate(140%) blur(6px); border-bottom:1px solid var(--gold)}
-    nav{max-width:var(--max); margin:auto; padding:12px var(--pad); display:flex; align-items:center; justify-content:space-between}
+    header{position:sticky; top:0; z-index:50; background:rgba(251,242,207,.9);
+      backdrop-filter:saturate(140%) blur(6px); border-bottom:1px solid var(--line)}
+    nav{max-width:var(--max); margin:auto; padding:12px var(--pad);
+      display:flex; align-items:center; justify-content:space-between}
     .brand{font-weight:700; letter-spacing:.3px}
     .links a{margin-left:18px; font-weight:600; color:var(--muted)}
     .links a.active{color:var(--ink)}
-    .btn-nav{margin-left:18px; padding:8px 14px; border-radius:999px; background:var(--terra); color:#fff; font-weight:700}
-    .btn-nav:hover{background:var(--terra-dark)}
+    .btn-nav{margin-left:18px; padding:8px 14px; border-radius:999px;
+      background:var(--primary); color:#fff; font-weight:700}
+    .btn-nav:hover{filter:brightness(.95)}
     .menu-btn{display:none; background:none; border:0; font-size:22px}
     @media (max-width:900px){
       .links{display:none}
       .menu-btn{display:block}
-      .mobile{display:none; background:var(--cream); border-top:1px solid var(--gold)}
-      .mobile a{display:block; padding:14px var(--pad); border-bottom:1px solid #eadccb; color:var(--muted); font-weight:600}
+      .mobile{display:none; background:var(--bg); border-top:1px solid var(--line)}
+      .mobile a{display:block; padding:14px var(--pad); border-bottom:1px solid var(--line); color:var(--muted); font-weight:600}
       .mobile a:last-child{border-bottom:0}
     }
+
     /* Layout base */
-    .wrap{max-width:var(--max); margin:auto; padding: min(7vw,70px) var(--pad)}
+    .wrap{max-width:var(--max); margin:auto; padding:min(7vw,70px) var(--pad)}
     h1{font-size: clamp(34px, 5.2vw, 56px); line-height:1.06; margin:0 0 8px}
     h2{font-size: clamp(24px, 3.4vw, 34px); margin:0 0 8px}
     p.lead{font-size: clamp(16px, 2.2vw, 19px); color:var(--muted)}
     .grid-2{display:grid; gap:26px; grid-template-columns: 1.05fr .95fr}
     .grid-3{display:grid; gap:18px; grid-template-columns: repeat(3,1fr)}
-    .grid-4{display:grid; gap:18px; grid-template-columns: repeat(4,1fr)}
-    @media (max-width:1000px){ .grid-2,.grid-3,.grid-4{grid-template-columns:1fr} }
-    .card{background:#fff; border:1px solid #eadccb; border-radius:var(--r); padding:18px; box-shadow:var(--shadow)}
-    .block{background:var(--sand); border:1px solid #eadccb; border-radius:var(--r); padding:22px}
-    .band{background:var(--gold); color:#3c332b}
+    @media (max-width:1000px){ .grid-2,.grid-3{grid-template-columns:1fr} }
+    .card{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:18px; box-shadow:var(--shadow)}
+    .block{background:#FFF7DA; border:1px solid var(--line); border-radius:var(--r); padding:22px}
     .muted{color:var(--muted)}
-    .btn{display:inline-block; padding:14px 18px; border-radius:999px; background:var(--terra); color:#fff; font-weight:800; letter-spacing:.2px}
-    .btn:hover{background:var(--terra-dark)}
-    .btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--ink)}
+    .tag{display:inline-block; font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+      color:#2b3a2f; background: color-mix(in oklab, var(--accent) 25%, #fff 75%);
+      padding:6px 10px; border-radius:999px}
+
+    .btn{display:inline-block; padding:14px 18px; border-radius:999px; background:var(--primary);
+      color:#fff; font-weight:800; letter-spacing:.2px}
+    .btn:hover{filter:brightness(.95)}
+    .btn.ghost{background:transparent; color:var(--ink); border:2px solid var(--ink)}
+
     .list{list-style:none; margin:0; padding:0}
-    .list li{display:flex; gap:10px; padding:8px 0; border-bottom:1px dashed #eadccb}
+    .list li{padding:8px 0; border-bottom:1px dashed var(--line)}
     .list li:last-child{border-bottom:0}
-    .tag{display:inline-block; font-family:Inter,Arial,sans-serif; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:#7a6a4f; background:#f3e6d8; padding:6px 10px; border-radius:999px}
-    .sep{height:1px; background:#eadccb; margin:12px 0}
-    footer{border-top:1px solid var(--gold); background:#fff}
-    footer .row{max-width:var(--max); margin:auto; padding:20px var(--pad); display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap}
+
+    footer{border-top:1px solid var(--line); background:var(--card)}
+    footer .row{max-width:var(--max); margin:auto; padding:20px var(--pad);
+      display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap}
   </style>
 </head>
 <body>
 <header>
   <nav>
-    <div class="brand">Matilde Matos Pires</div>
+    <div class="brand">Helena Costa</div>
     <div class="links" id="links">
       <a href="#inicio" class="active">Home</a>
       <a href="#sobre">Sobre</a>
@@ -98,29 +109,28 @@
       <h1>Eleva a tua produtividade.<br>Eu trato do resto.</h1>
       <p class="lead">Gestão de agenda e e-mails, atendimento ao cliente e organização — para que foques no crescimento do negócio.</p>
       <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:8px">
-        <a class="btn" href="https://calendly.com/<!-- TODO: o_teu_utilizador -->/15min" target="_blank" rel="noopener">Marcar chamada</a>
+        <a class="btn" href="https://calendly.com/<!-- TODO: teu_utilizador -->/15min" target="_blank" rel="noopener">Marcar chamada</a>
         <a class="btn ghost" href="#servicos">Ver serviços</a>
       </div>
       <div class="block" style="margin-top:18px">
-        <strong>Pacotes disponíveis:</strong>
-        <div class="list" style="margin-top:6px">
+        <strong>Pacotes disponíveis</strong>
+        <ul class="list" style="margin-top:6px">
           <li>Piloto — 10h / 2 semanas</li>
           <li>Mensal — prioridades + SLA</li>
           <li>À medida — projeto específico</li>
-        </div>
+        </ul>
       </div>
     </div>
     <div>
-      <!-- Substitui a imagem pelo teu ficheiro (podes colocar em /assets e referenciar) -->
+      <!-- Troca por uma imagem tua -->
       <img src="https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?q=80&w=1200&auto=format&fit=crop" alt="Assistente virtual a trabalhar">
-      <div class="band card" style="margin-top:12px; border:none">
+      <div class="card" style="margin-top:12px; border-color: var(--accent)">
         <div class="grid-2" style="align-items:center">
           <div>
-            <strong>Join the Newsletter</strong>
-            <div class="muted">Recebe dicas rápidas de produtividade.</div>
+            <strong style="font-family:'Playfair Display',Georgia,serif">Newsletter</strong>
+            <div class="muted">Dicas rápidas de produtividade.</div>
           </div>
-          <!-- Placeholder: muda para o teu provider (Buttondown, Substack, etc.) -->
-          <a class="btn" style="background:#2E2A27" href="mailto:<!-- TODO: teu_email -->?subject=Subscrever%20newsletter">Subscrever</a>
+          <a class="btn" style="background:var(--accent); color:#0f2a17" href="mailto:<!-- TODO: teu_email -->?subject=Subscrever%20newsletter">Subscrever</a>
         </div>
       </div>
     </div>
@@ -131,15 +141,14 @@
 <section id="sobre" class="wrap">
   <div class="grid-2">
     <div>
-      <h2>Olá, sou a Matilde.</h2>
+      <h2>Olá, sou a Helena.</h2>
       <p>Sou Assistente Virtual e ajudo empreendedores e PMEs a ganharem tempo, foco e previsibilidade. Trabalho com Google Workspace, Notion, Trello/Asana e CRM, sempre com comunicação clara e entregas consistentes.</p>
       <p>Comecemos com uma chamada curta para alinhar prioridades e montar o plano certo para ti.</p>
       <a class="btn" href="https://calendly.com/<!-- TODO -->/15min" target="_blank" rel="noopener">Agendar 15 min</a>
     </div>
     <div class="card">
       <h3 style="margin-top:0">Competências</h3>
-      <div class="sep"></div>
-      <ul class="list">
+      <ul class="list" style="margin-top:10px">
         <li>Gestão de inbox & calendário</li>
         <li>Atendimento e follow-up</li>
         <li>Organização de documentos & propostas</li>
@@ -191,28 +200,9 @@
   </div>
 </section>
 
-<!-- TESTEMUNHOS (opcional) -->
-<section class="wrap">
-  <h2>Testemunhos</h2>
-  <div class="grid-3" style="margin-top:12px">
-    <div class="card">
-      <p><em>“Organização impecável e comunicação objetiva. Libertou-me horas por semana.”</em></p>
-      <p class="muted">— Cliente A, Founder</p>
-    </div>
-    <div class="card">
-      <p><em>“Melhorámos o atendimento e criámos processos simples que a equipa segue.”</em></p>
-      <p class="muted">— Cliente B, E-commerce</p>
-    </div>
-    <div class="card">
-      <p><em>“Delegar ficou fácil. Pacote mensal com previsibilidade.”</em></p>
-      <p class="muted">— Cliente C, Consultoria</p>
-    </div>
-  </div>
-</section>
-
 <!-- CTA + CONTACTO -->
 <section id="contacto" class="wrap">
-  <div class="block">
+  <div class="card" style="border-color:var(--accent)">
     <div class="grid-2" style="align-items:center">
       <div>
         <h2>Pronta para começar?</h2>
@@ -222,9 +212,9 @@
           <a class="btn ghost" href="mailto:<!-- TODO: teu_email -->?subject=Contacto%20via%20site">Enviar e-mail</a>
         </div>
       </div>
-      <div class="card">
+      <div class="card" style="border-color:var(--line)">
         <h3 style="margin-top:0">Formulário</h3>
-        <!-- Troca por Google Forms (embed) ou Tally -->
+        <!-- Troca pelo embed do teu Google Forms ou Tally -->
         <!--
         <iframe src="https://docs.google.com/forms/d/e/SEU_ID/viewform?embedded=true" width="100%" height="480" frameborder="0" marginheight="0" marginwidth="0">A carregar…</iframe>
         -->
@@ -237,7 +227,7 @@
 
 <footer>
   <div class="row">
-    <div>© <span id="y"></span> Matilde Matos Pires — Assistente Virtual</div>
+    <div>© <span id="y"></span> Helena Costa — Assistente Virtual</div>
     <div style="display:flex; gap:14px">
       <a class="muted" href="https://www.linkedin.com/in/<!-- TODO -->" target="_blank" rel="noopener">LinkedIn</a>
       <a class="muted" href="#inicio">Topo ↑</a>
